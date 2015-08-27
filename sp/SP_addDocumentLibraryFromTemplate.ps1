@@ -1,23 +1,25 @@
-$spWebCol = Get-SPWeb -site "http://axecmacc" -Identity "/vendors/*" -Limit ALL
-$spListAdress = Get-SPWeb -site "http://axecmacc" -Identity "/templates/vendortemplate"
 
+#Create collection of subsites which have "vendors" in site adress
+$spWebCol = Get-SPWeb -site "http://axecmacc" -Identity "/vendors/*" -Limit ALL 
+
+#Get template adress
+$spListAdress = Get-SPWeb -site "http://axecmacc" -Identity "/templates/vendortemplate"
+#Store array of custom templates
 $spTemplates = $spListAddress.Site.GetCustomListTemplates($spListAdress)
 
+#Loop all sites in collection
 foreach($site in $spWebCol)
 {
-    $site
-    
+    #Save list with name "Purchase Agreements"
     $ListPresent = $site.Lists.TryGetList("Purchase Agreements")
-
+    
+    #If list has been found
     if($ListPresent -ne $null)
     {
-        #The list is present
-        "Yes"
     }
+    #If not create List "Purchase Agreements" from template
     else
     {
-        #Lists.Add("Purchase Agreements", "Purchase Agreements", $listTemplate["Purchase Agreements"])
-        
-        "No"
+        Lists.Add("Purchase Agreements", "Purchase Agreements", $listTemplate["Purchase Agreements"])
     }
 }
