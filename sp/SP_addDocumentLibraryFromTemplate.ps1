@@ -5,7 +5,7 @@ $spWebCol = Get-SPWeb -site "http://axecmacc" -Identity "/vendors/*" -Limit ALL
 #Get template adress
 $spListAdress = Get-SPWeb -site "http://axecmacc" -Identity "/templates/vendortemplate"
 #Store array of custom templates
-$spTemplates = $spListAddress.Site.GetCustomListTemplates($spListAdress)
+$spTemplates = $spListAdress.Site.GetCustomListTemplates($spListAdress)
 
 #Loop all sites in collection
 foreach($site in $spWebCol)
